@@ -37,7 +37,7 @@ export default {
       commit('toggleLoading', true)
 
       try {
-        const { data } = await axios.post('/technologies', { name })
+        const { data } = await axios.get('/technologies', { name })
 
         commit('setTechnologies', data)
 
