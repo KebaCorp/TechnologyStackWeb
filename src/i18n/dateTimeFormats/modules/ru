@@ -1,0 +1,27 @@
+export default {
+  short: {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  },
+  long: {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    weekday: 'short',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: false
+  },
+  dateTime: {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: false
+  },
+  year: {
+    year: 'numeric'
+  }
+}

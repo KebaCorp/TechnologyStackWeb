@@ -1,0 +1,13 @@
+version: '3.1'
+
+services:
+
+  web:
+    image: php:7.1-apache
+    environment:
+      - APACHE_RUN_USER=#1000
+    volumes:
+      - ${WEB_PATH}:/var/www/html/
+    ports:
+      - ${WEB_PORT}:80
+    working_dir: /var/www/html/
