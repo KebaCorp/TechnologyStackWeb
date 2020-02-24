@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Main from '@/components/Main.vue'
 
 Vue.use(VueRouter)
 
@@ -8,7 +7,19 @@ const routes = [
   {
     path: '/',
     name: 'main',
-    component: Main
+    component: () => import('@/components/Main.vue')
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: () => import('@/components/admin/Admin.vue'),
+    children: [
+      {
+        path: '/admin/types',
+        name: 'types',
+        component: () => import('@/components/admin/type/Types.vue')
+      }
+    ]
   }
 ]
 

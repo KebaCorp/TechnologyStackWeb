@@ -1,5 +1,9 @@
 <template>
   <v-app id="app">
+
+    <!--Top menu-->
+    <toolbar/>
+
     <v-content>
       <v-container
         class="fill-height"
@@ -10,6 +14,17 @@
     </v-content>
   </v-app>
 </template>
+
+<script>
+const Toolbar = () => import(/* webpackChunkName: "toolbar" */ '@/components/menu/Toolbar')
+
+export default {
+  name: 'App',
+  components: {
+    Toolbar
+  }
+}
+</script>
 
 <style lang="scss">
 
