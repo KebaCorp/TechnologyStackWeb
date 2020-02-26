@@ -102,13 +102,13 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'Main',
   computed: {
-    ...mapGetters('technologies', [
+    ...mapGetters('dashboard', [
       'loading',
       'technologies'
     ])
   },
   created () {
-    this.$store.dispatch('technologies/getTechnologies')
+    this.$store.dispatch('dashboard/getTechnologies')
   }
 }
 </script>

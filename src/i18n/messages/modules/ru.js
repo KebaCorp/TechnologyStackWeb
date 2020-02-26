@@ -5,7 +5,8 @@ export default {
   },
   menu: {
     types: 'Типы',
-    stages: 'Стадии'
+    stages: 'Стадии',
+    technologies: 'Технологии'
   },
   content: {
     create: 'Создать',
@@ -15,17 +16,21 @@ export default {
     successSave: 'Успешно сохранено'
   },
   type: {
+    type: 'Тип',
     title: 'Заголовок',
     noTypes: 'Нет типов',
     creating: 'Создание типа'
   },
   stage: {
+    stage: 'Стадия',
     title: 'Заголовок',
     noStages: 'Нет стадий',
     creating: 'Создание стадии'
   },
   technology: {
-    noTechnologies: 'Нет технологий'
+    title: 'Заголовок',
+    noTechnologies: 'Нет технологий',
+    creating: 'Создание технологии'
   },
   validate: {
     required: 'Значение не может быть пустым',

@@ -4,12 +4,12 @@
       <v-card>
         <v-toolbar dark fixed color="primary">
 
-          <!--Кнопка закрытия редактора-->
+          <!--Editor close button-->
           <v-btn icon dark @click="innerDialog = false">
             <v-icon>mdi-close</v-icon>
           </v-btn>
 
-          <!--Заголовок-->
+          <!--Title-->
           <v-toolbar-title>
             {{ $t('type.creating') }}
           </v-toolbar-title>

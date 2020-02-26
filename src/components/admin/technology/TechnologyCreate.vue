@@ -11,7 +11,7 @@
 
           <!--Title-->
           <v-toolbar-title>
-            {{ $t('stage.creating') }}
+            {{ $t('technology.creating') }}
           </v-toolbar-title>
 
         </v-toolbar>
@@ -26,9 +26,27 @@
                   v-model="title"
                   :rules="titleRules"
                   :counter="255"
-                  :label="$t('stage.title')"
+                  :label="$t('technology.title')"
                   required
                   autofocus
+                />
+
+                <!--Types-->
+                <v-select
+                  v-model="typeId"
+                  :items="types"
+                  :label="$t('type.type')"
+                  item-text="title"
+                  item-value="id"
+                />
+
+                <!--Stages-->
+                <v-select
+                  v-model="stageId"
+                  :items="stages"
+                  :label="$t('stage.stage')"
+                  item-text="title"
+                  item-value="id"
                 />
 
                 <!--Save-->
@@ -56,8 +74,10 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  name: 'StageCreate',
+  name: 'TechnologyCreate',
   props: {
     dialog: {
       type: Boolean,
@@ -65,6 +85,12 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('types', [
+      'types'
+    ]),
+    ...mapGetters('stages', [
+      'stages'
+    ]),
     innerDialog: {
       get () {
         return this.dialog
@@ -83,7 +109,10 @@ export default {
   data: () => ({
     loading: false,
     valid: false,
+    typeId: null,
+    stageId: null,
     title: '',
+    image: '',
     errors: {}
   }),
   methods: {
@@ -93,8 +122,11 @@ export default {
     create () {
       if (!this.valid || this.loading) return false
 
-      this.$store.dispatch('stages/create', {
-        title: this.title
+      this.$store.dispatch('technologies/create', {
+        typeId: this.typeId,
+        stageId: this.stageId,
+        title: this.title,
+        image: this.image
       })
         .then(() => {
           this.$emit('onCreate')
@@ -111,8 +143,8 @@ export default {
           this.innerDialog = false
         })
         .then(() => {
-          // Load stages
-          this.$store.dispatch('stages/setStages')
+          // Load technologies
+          this.$store.dispatch('technologies/setTechnologies')
         })
         .catch(error => {
           // Error notification
@@ -128,6 +160,13 @@ export default {
           }
         })
     }
+  },
+  created () {
+    // Load types
+    this.$store.dispatch('types/setTypes')
+
+    // Load stages
+    this.$store.dispatch('stages/setStages')
   }
 }
 </script>
