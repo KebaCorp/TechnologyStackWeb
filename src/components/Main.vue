@@ -60,7 +60,7 @@
                       <v-alert
                         :value="!loading"
                         type="info"
-                        class="mb-0"
+                        class="mb-0 ml-2 mr-2"
                       >
                         {{ $t('technology.noTechnologies') }}
                       </v-alert>

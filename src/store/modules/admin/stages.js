@@ -4,42 +4,42 @@ export default {
   namespaced: true,
   state: {
     loading: false,
-    types: []
+    stages: []
   },
   getters: {
     loading (state) {
       return state.loading
     },
-    types (state) {
-      return state.types
+    stages (state) {
+      return state.stages
     }
   },
   mutations: {
     toggleLoading (state, payload) {
       state.loading = payload
     },
-    setTypes (state, payload) {
+    setStages (state, payload) {
       if (Array.isArray(payload)) {
-        state.types = payload
+        state.stages = payload
       } else {
-        state.types = []
+        state.stages = []
       }
     }
   },
   actions: {
     /**
-     * Get all types.
+     * Get all stages.
      *
      * @param commit
      * @returns {Promise<*>}
      */
-    async setTypes ({ commit }) {
+    async setStages ({ commit }) {
       commit('toggleLoading', true)
 
       try {
-        const { data } = await axios.get('/types')
+        const { data } = await axios.get('/stages')
 
-        commit('setTypes', data)
+        commit('setStages', data)
         commit('toggleLoading', false)
 
         return data
@@ -51,7 +51,7 @@ export default {
     },
 
     /**
-     * Create type.
+     * Create stage.
      *
      * @param commit
      * @param payload
@@ -61,7 +61,7 @@ export default {
       commit('toggleLoading', true)
 
       try {
-        const { data } = await axios.post('/type/create', payload)
+        const { data } = await axios.post('/stage/create', payload)
         commit('toggleLoading', false)
 
         return data
@@ -73,7 +73,7 @@ export default {
     },
 
     /**
-     * Delete type.
+     * Delete stage.
      *
      * @param commit
      * @param id
@@ -83,7 +83,7 @@ export default {
       commit('toggleLoading', true)
 
       try {
-        const { data } = await axios.post('/type/delete', { id })
+        const { data } = await axios.post('/stage/delete', { id })
         commit('toggleLoading', false)
 
         return data

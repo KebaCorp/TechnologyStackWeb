@@ -12,12 +12,18 @@ const routes = [
   {
     path: '/admin',
     name: 'admin',
+    redirect: { name: 'types' },
     component: () => import('@/components/admin/Admin.vue'),
     children: [
       {
         path: '/admin/types',
         name: 'types',
         component: () => import('@/components/admin/type/Types.vue')
+      },
+      {
+        path: '/admin/stages',
+        name: 'stages',
+        component: () => import('@/components/admin/stage/Stages.vue')
       }
     ]
   }

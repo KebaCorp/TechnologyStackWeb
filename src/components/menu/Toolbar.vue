@@ -7,7 +7,9 @@
   >
 
     <!--Логотип-->
-    <v-toolbar-title>
+    <v-toolbar-title
+      @click="$router.push({ name: 'main' })"
+    >
       <span class="title">{{ $t('app.name') }}</span>
     </v-toolbar-title>
 

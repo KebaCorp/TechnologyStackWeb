@@ -4,11 +4,15 @@ export default {
     logo: '/img/logo.png'
   },
   menu: {
-    types: 'Типы'
+    types: 'Типы',
+    stages: 'Стадии'
   },
   content: {
     create: 'Создать',
     save: 'Сохранить'
+  },
+  messages: {
+    successSave: 'Успешно сохранено'
   },
   type: {
     title: 'Заголовок',
@@ -16,7 +20,9 @@ export default {
     creating: 'Создание типа'
   },
   stage: {
-    noStages: 'Нет стадий'
+    title: 'Заголовок',
+    noStages: 'Нет стадий',
+    creating: 'Создание стадии'
   },
   technology: {
     noTechnologies: 'Нет технологий'

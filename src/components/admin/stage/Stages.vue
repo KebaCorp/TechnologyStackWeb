@@ -13,7 +13,7 @@
 
               <!--Title-->
               <v-flex>
-                <h3 class="font-weight-light display-1 text-left">{{ $t('menu.types') }}</h3>
+                <h3 class="font-weight-light display-1 text-left">{{ $t('menu.stages') }}</h3>
               </v-flex>
 
               <v-flex class="text-right">
@@ -21,7 +21,7 @@
                 <!--Create-->
                 <v-btn
                   color="success"
-                  @click="toggleTypeCreateDialog({ value: true })"
+                  @click="toggleStageCreateDialog({ value: true })"
                 >
                   <v-icon left dark>mdi-plus</v-icon>
                   {{ $t('content.create') }}
@@ -39,7 +39,7 @@
 
               <!--Сообщение, если нет записей-->
               <v-flex
-                v-if="!Array.isArray(types) || !types.length"
+                v-if="!Array.isArray(stages) || !stages.length"
                 xs12
               >
                 <v-alert
@@ -47,7 +47,7 @@
                   type="info"
                   class="mb-0"
                 >
-                  {{ $t('type.noTypes') }}
+                  {{ $t('stage.noStages') }}
                 </v-alert>
               </v-flex>
               <v-flex v-else>
@@ -55,20 +55,20 @@
 
                   <!--Карточка записи-->
                   <v-flex
-                    v-for="(type, index) in types"
-                    :key="type._id"
+                    v-for="(stage, index) in stages"
+                    :key="stage._id"
                     xs12
                     mb-3
                   >
                     <v-hover v-slot:default="{ hover }">
                       <v-card :elevation="hover ? 3 : 0">
                         <v-card-title>
-                          {{ index + 1 }}. {{ type.title }}
+                          {{ index + 1 }}. {{ stage.title }}
                           <v-flex class="text-right">
                             <v-btn
                               icon
                               color="error"
-                              @click="deleteType(type.id)"
+                              @click="deleteStage(stage.id)"
                             >
                               <v-icon>mdi-delete</v-icon>
                             </v-btn>
@@ -87,11 +87,11 @@
           <!--Loading-->
           <v-progress-linear v-if="loading" :indeterminate="true"/>
 
-          <!--Type create dialog-->
-          <type-create
-            v-if="typeCreateDialog"
-            :dialog="typeCreateDialog"
-            @onToggle="toggleTypeCreateDialog"
+          <!--Stage create dialog-->
+          <stage-create
+            v-if="stageCreateDialog"
+            :dialog="stageCreateDialog"
+            @onToggle="toggleStageCreateDialog"
           />
 
         </v-card>
@@ -102,51 +102,51 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import TypeCreate from './TypeCreate'
+import StageCreate from './StageCreate'
 
 export default {
-  name: 'Types',
-  components: { TypeCreate },
+  name: 'Stages',
+  components: { StageCreate },
   computed: {
-    ...mapGetters('types', [
+    ...mapGetters('stages', [
       'loading',
-      'types'
+      'stages'
     ])
   },
   data: () => ({
-    typeCreateDialog: false
+    stageCreateDialog: false
   }),
   methods: {
     /**
-     * Load types.
+     * Load stages.
      */
-    loadTypes () {
-      this.$store.dispatch('types/setTypes')
+    loadStages () {
+      this.$store.dispatch('stages/setStages')
     },
 
     /**
-     * Toggle type create dialog.
+     * Toggle stage create dialog.
      *
      * @param value
      */
-    toggleTypeCreateDialog ({ value }) {
-      this.typeCreateDialog = value
+    toggleStageCreateDialog ({ value }) {
+      this.stageCreateDialog = value
     },
 
     /**
-     * Delete type.
+     * Delete stage.
      *
      * @param id
      */
-    deleteType (id) {
-      this.$store.dispatch('types/delete', { id })
+    deleteStage (id) {
+      this.$store.dispatch('stages/delete', { id })
         .then(() => {
-          this.loadTypes()
+          this.loadStages()
         })
     }
   },
   created () {
-    this.loadTypes()
+    this.loadStages()
   }
 }
 </script>

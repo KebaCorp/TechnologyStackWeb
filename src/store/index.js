@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import snackBar from './modules/snackBar'
 import technologies from './modules/technologies'
 import types from './modules/admin/types'
+import stages from './modules/admin/stages'
 
 Vue.use(Vuex)
 
@@ -11,6 +12,7 @@ export default new Vuex.Store({
   modules: {
     snackBar,
     technologies,
-    types
+    types,
+    stages
   }
 })
