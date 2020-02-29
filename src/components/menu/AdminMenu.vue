@@ -30,6 +30,10 @@ export default {
         name: 'technologies'
       },
       {
+        path: '/admin/technology-items',
+        name: 'technologyItems'
+      },
+      {
         path: '/admin/projects',
         name: 'projects'
       }

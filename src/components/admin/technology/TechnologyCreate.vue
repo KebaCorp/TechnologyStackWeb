@@ -51,9 +51,19 @@
                   item-value="id"
                 />
 
+                <!--Description editor-->
+                <v-flex pt-4 pb-4>
+                  <h4 class="text-left mb-2 font-weight-thin">{{ $t('content.description') }}</h4>
+                  <content-editor
+                    :value="description"
+                    :disabled="loading"
+                    @onChange="onChangeDescription"
+                  />
+                </v-flex>
+
                 <!--Image-->
                 <v-flex pt-4 pb-4>
-                  <h4 class="text-left mb-2 font-weight-thin">{{ $t('content.image') }}:</h4>
+                  <h4 class="text-left mb-2 font-weight-thin">{{ $t('content.image') }}</h4>
                   <v-hover>
                     <v-img
                       slot-scope="{ hover }"
@@ -107,6 +117,13 @@
                   />
                 </v-flex>
 
+                <!--Is deprecated-->
+                <v-switch
+                  v-model="isDeprecated"
+                  :label="$t('content.isDeprecated')"
+                  :rules="isDeprecatedRules"
+                />
+
                 <!--Save-->
                 <v-btn
                   :disabled="!valid || loading"
@@ -134,11 +151,13 @@
 <script>
 import { mapGetters } from 'vuex'
 
+const ContentEditor = () => import(/* webpackChunkName: 'ContentEditor' */ '@/components/main/ContentEditor')
 const ImageCropUpload = () => import('vue-image-crop-upload')
 
 export default {
   name: 'TechnologyCreate',
   components: {
+    ContentEditor,
     ImageCropUpload
   },
   props: {
@@ -177,6 +196,11 @@ export default {
       return [
         v => !!v || this.$t('validate.required')
       ]
+    },
+    isDeprecatedRules () {
+      return [
+        v => v !== null || this.$t('validate.required')
+      ]
     }
   },
   data: () => ({
@@ -185,8 +209,10 @@ export default {
     typeId: null,
     stageId: null,
     title: '',
+    description: '',
     image: '',
     showImageUpload: false,
+    isDeprecated: false,
     errors: {}
   }),
   methods: {
@@ -200,7 +226,9 @@ export default {
         typeId: this.typeId,
         stageId: this.stageId,
         title: this.title,
-        image: this.image
+        description: this.description,
+        image: this.image,
+        isDeprecated: this.isDeprecated
       })
         .then(() => {
           this.$emit('onCreate')
@@ -243,6 +271,15 @@ export default {
     setImage (image) {
       this.image = image
       this.showImageUpload = false
+    },
+
+    /**
+     * On description changed.
+     *
+     * @param value
+     */
+    onChangeDescription ({ value }) {
+      this.description = value
     }
   },
   created () {

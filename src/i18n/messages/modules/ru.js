@@ -8,14 +8,17 @@ export default {
     types: 'Типы',
     stages: 'Стадии',
     technologies: 'Технологии',
-    projects: 'Проекты'
+    projects: 'Проекты',
+    technologyItems: 'Скиллы технологий'
   },
   content: {
     create: 'Создать',
     save: 'Сохранить',
     image: 'Изображение',
     changeImage: 'Изменить изображение',
-    deleteImage: 'Удалить изображение'
+    deleteImage: 'Удалить изображение',
+    description: 'Описание',
+    isDeprecated: 'Устаревшая'
   },
   messages: {
     successSave: 'Успешно сохранено'
@@ -36,6 +39,11 @@ export default {
     title: 'Заголовок',
     noTechnologies: 'Нет технологий',
     creating: 'Создание технологии'
+  },
+  technologyItem: {
+    title: 'Заголовок',
+    noTechnologyItems: 'Нет скиллов технологии',
+    creating: 'Создание скилла технологии'
   },
   project: {
     title: 'Заголовок',
@@ -65,5 +73,8 @@ export default {
       outOfSize: 'Размер изображения превышает: ',
       lowestPx: 'Качество изображения слишком низкое. Ожидается по крайней мере: '
     }
+  },
+  quillEditor: {
+    placeholder: 'Введите текст...'
   }
 }

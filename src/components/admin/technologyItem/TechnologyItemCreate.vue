@@ -11,7 +11,7 @@
 
           <!--Title-->
           <v-toolbar-title>
-            {{ $t('project.creating') }}
+            {{ $t('technologyItem.creating') }}
           </v-toolbar-title>
 
         </v-toolbar>
@@ -26,17 +26,9 @@
                   v-model="title"
                   :rules="titleRules"
                   :counter="255"
-                  :label="$t('project.title')"
+                  :label="$t('technologyItem.title')"
                   required
                   autofocus
-                />
-
-                <!--Code-->
-                <v-text-field
-                  v-model="code"
-                  :rules="codeRules"
-                  :counter="255"
-                  :label="$t('project.code')"
                 />
 
                 <!--Description editor-->
@@ -46,62 +38,6 @@
                     :value="description"
                     :disabled="loading"
                     @onChange="onChangeDescription"
-                  />
-                </v-flex>
-
-                <!--Image-->
-                <v-flex pt-4 pb-4>
-                  <h4 class="text-left mb-2 font-weight-thin">{{ $t('content.image') }}</h4>
-                  <v-hover>
-                    <v-img
-                      slot-scope="{ hover }"
-                      height="200px"
-                      width="200px"
-                      :src="image || $t('app.defaultImage')"
-                      :alt="$t('content.image')"
-                    >
-                      <v-expand-transition>
-                        <div
-                          v-if="hover"
-                          class="d-flex transition-fast-in-fast-out grey darken-2 v-card--reveal display-2 white--text"
-                          style="height: 27%;"
-                        >
-                          <v-flex xs12 sm12>
-
-                            <!--Change image-->
-                            <v-btn
-                              dark
-                              icon
-                              @click="showImageUpload = !showImageUpload"
-                              :title="$t('content.changeImage')"
-                            >
-                              <v-icon>mdi-pencil</v-icon>
-                            </v-btn>
-
-                            <!--Delete image-->
-                            <v-btn
-                              dark
-                              icon
-                              @click="image = ''"
-                              :title="$t('content.deleteImage')"
-                            >
-                              <v-icon>mdi-delete</v-icon>
-                            </v-btn>
-
-                          </v-flex>
-                        </div>
-                      </v-expand-transition>
-                    </v-img>
-                  </v-hover>
-                  <image-crop-upload
-                    v-if="showImageUpload"
-                    field="img"
-                    @crop-success="setImage"
-                    v-model="showImageUpload"
-                    :width="300"
-                    :height="300"
-                    :lang-ext="$t('imageCropUpload')"
-                    img-format="jpg"
                   />
                 </v-flex>
 
@@ -130,13 +66,11 @@
 </template>
 
 <script>
-const ImageCropUpload = () => import('vue-image-crop-upload')
 const ContentEditor = () => import(/* webpackChunkName: 'ContentEditor' */ '@/components/main/ContentEditor')
 
 export default {
-  name: 'ProjectCreate',
+  name: 'TechnologyItemCreate',
   components: {
-    ImageCropUpload,
     ContentEditor
   },
   props: {
@@ -159,12 +93,6 @@ export default {
         v => !!v || this.$t('validate.required'),
         v => v.length <= 255 || this.$t('validate.maxLength', { max: 255 })
       ]
-    },
-    codeRules () {
-      return [
-        v => !!v || this.$t('validate.required'),
-        v => v.length <= 255 || this.$t('validate.maxLength', { max: 255 })
-      ]
     }
   },
   data: () => ({
@@ -172,9 +100,6 @@ export default {
     valid: false,
     title: '',
     description: '',
-    code: '',
-    image: '',
-    showImageUpload: false,
     errors: {}
   }),
   methods: {
@@ -184,7 +109,7 @@ export default {
     create () {
       if (!this.valid || this.loading) return false
 
-      this.$store.dispatch('projects/create', {
+      this.$store.dispatch('technologyItems/create', {
         title: this.title,
         description: this.description,
         code: this.code,
@@ -205,8 +130,8 @@ export default {
           this.innerDialog = false
         })
         .then(() => {
-          // Load projects
-          this.$store.dispatch('projects/setProjects')
+          // Load technologyItems
+          this.$store.dispatch('technologyItems/setTechnologyItems')
         })
         .catch(error => {
           // Error notification
@@ -221,16 +146,6 @@ export default {
             this.errors = error.validationErrors
           }
         })
-    },
-
-    /**
-     * Change image.
-     *
-     * @param image
-     */
-    setImage (image) {
-      this.image = image
-      this.showImageUpload = false
     },
 
     /**

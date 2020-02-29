@@ -31,6 +31,11 @@ const routes = [
         component: () => import('@/components/admin/technology/Technologies.vue')
       },
       {
+        path: '/admin/technology-items',
+        name: 'technologyItems',
+        component: () => import('@/components/admin/technologyItem/TechnologyItems.vue')
+      },
+      {
         path: '/admin/projects',
         name: 'projects',
         component: () => import('@/components/admin/project/Projects.vue')
