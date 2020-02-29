@@ -5,6 +5,7 @@ import dashboard from './modules/dashboard'
 import types from './modules/admin/types'
 import stages from './modules/admin/stages'
 import technologies from './modules/admin/technologies'
+import projects from './modules/admin/projects'
 
 Vue.use(Vuex)
 
@@ -15,6 +16,7 @@ export default new Vuex.Store({
     dashboard,
     types,
     stages,
-    technologies
+    technologies,
+    projects
   }
 })

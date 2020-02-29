@@ -11,7 +11,7 @@
 
           <!--Title-->
           <v-toolbar-title>
-            {{ $t('technology.creating') }}
+            {{ $t('project.creating') }}
           </v-toolbar-title>
 
         </v-toolbar>
@@ -26,29 +26,17 @@
                   v-model="title"
                   :rules="titleRules"
                   :counter="255"
-                  :label="$t('technology.title')"
+                  :label="$t('project.title')"
                   required
                   autofocus
                 />
 
-                <!--Types-->
-                <v-select
-                  v-model="typeId"
-                  :items="types"
-                  :rules="typeRules"
-                  :label="$t('type.type')"
-                  item-text="title"
-                  item-value="id"
-                />
-
-                <!--Stages-->
-                <v-select
-                  v-model="stageId"
-                  :items="stages"
-                  :rules="stageRules"
-                  :label="$t('stage.stage')"
-                  item-text="title"
-                  item-value="id"
+                <!--Code-->
+                <v-text-field
+                  v-model="code"
+                  :rules="codeRules"
+                  :counter="255"
+                  :label="$t('project.code')"
                 />
 
                 <!--Image-->
@@ -132,12 +120,10 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 const ImageCropUpload = () => import('vue-image-crop-upload')
 
 export default {
-  name: 'TechnologyCreate',
+  name: 'ProjectCreate',
   components: {
     ImageCropUpload
   },
@@ -148,12 +134,6 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('types', [
-      'types'
-    ]),
-    ...mapGetters('stages', [
-      'stages'
-    ]),
     innerDialog: {
       get () {
         return this.dialog
@@ -168,23 +148,18 @@ export default {
         v => v.length <= 255 || this.$t('validate.maxLength', { max: 255 })
       ]
     },
-    typeRules () {
+    codeRules () {
       return [
-        v => !!v || this.$t('validate.required')
-      ]
-    },
-    stageRules () {
-      return [
-        v => !!v || this.$t('validate.required')
+        v => !!v || this.$t('validate.required'),
+        v => v.length <= 255 || this.$t('validate.maxLength', { max: 255 })
       ]
     }
   },
   data: () => ({
     loading: false,
     valid: false,
-    typeId: null,
-    stageId: null,
     title: '',
+    code: '',
     image: '',
     showImageUpload: false,
     errors: {}
@@ -196,10 +171,9 @@ export default {
     create () {
       if (!this.valid || this.loading) return false
 
-      this.$store.dispatch('technologies/create', {
-        typeId: this.typeId,
-        stageId: this.stageId,
+      this.$store.dispatch('projects/create', {
         title: this.title,
+        code: this.code,
         image: this.image
       })
         .then(() => {
@@ -217,8 +191,8 @@ export default {
           this.innerDialog = false
         })
         .then(() => {
-          // Load technologies
-          this.$store.dispatch('technologies/setTechnologies')
+          // Load projects
+          this.$store.dispatch('projects/setProjects')
         })
         .catch(error => {
           // Error notification
@@ -244,13 +218,6 @@ export default {
       this.image = image
       this.showImageUpload = false
     }
-  },
-  created () {
-    // Load types
-    this.$store.dispatch('types/setTypes')
-
-    // Load stages
-    this.$store.dispatch('stages/setStages')
   }
 }
 </script>

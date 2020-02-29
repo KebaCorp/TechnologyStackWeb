@@ -28,6 +28,10 @@ export default {
       {
         path: '/admin/technologies',
         name: 'technologies'
+      },
+      {
+        path: '/admin/projects',
+        name: 'projects'
       }
     ]
   })

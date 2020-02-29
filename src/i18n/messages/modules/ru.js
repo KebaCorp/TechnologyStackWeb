@@ -7,7 +7,8 @@ export default {
   menu: {
     types: 'Типы',
     stages: 'Стадии',
-    technologies: 'Технологии'
+    technologies: 'Технологии',
+    projects: 'Проекты'
   },
   content: {
     create: 'Создать',
@@ -35,6 +36,12 @@ export default {
     title: 'Заголовок',
     noTechnologies: 'Нет технологий',
     creating: 'Создание технологии'
+  },
+  project: {
+    title: 'Заголовок',
+    code: 'Код',
+    noProjects: 'Нет проектов',
+    creating: 'Создание проекта'
   },
   validate: {
     required: 'Значение не может быть пустым',
