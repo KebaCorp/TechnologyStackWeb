@@ -1,6 +1,6 @@
 export default {
   app: {
-    name: 'Technologies Stack Web',
+    name: 'Technologies Stack',
     logo: '/img/logo.png'
   },
   menu: {
