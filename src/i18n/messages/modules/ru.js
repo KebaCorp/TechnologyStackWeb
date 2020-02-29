@@ -5,6 +5,7 @@ export default {
     defaultImage: '/img/default.jpg'
   },
   menu: {
+    main: 'Главная',
     types: 'Типы',
     stages: 'Стадии',
     technologies: 'Технологии',
@@ -18,10 +19,15 @@ export default {
     changeImage: 'Изменить изображение',
     deleteImage: 'Удалить изображение',
     description: 'Описание',
-    isDeprecated: 'Устаревшая'
+    isDeprecated: 'Устаревшая',
+    goBack: 'Назад'
   },
   messages: {
     successSave: 'Успешно сохранено'
+  },
+  errors: {
+    pageNotFound: 'Страница не найдена',
+    tryFollowingPages: 'Пожалуйста, попробуйте перейти на одну из следующих страниц:'
   },
   type: {
     type: 'Тип',

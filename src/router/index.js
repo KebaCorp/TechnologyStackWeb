@@ -10,6 +10,15 @@ const routes = [
     component: () => import('@/components/Main.vue')
   },
   {
+    path: '*',
+    redirect: '/404'
+  },
+  {
+    path: '/404',
+    name: '404',
+    component: () => import(/* webpackChunkName: 'NotFound' */ '@/components/errors/NotFound')
+  },
+  {
     path: '/admin',
     name: 'admin',
     redirect: { name: 'types' },
