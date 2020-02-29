@@ -1,8 +1,9 @@
 import Axios from 'axios'
 import i18n from '@/i18n'
+import Authorization from '@/models/Authorization'
 
 /**
- * Создание Axios с параметрами.
+ * Create Axios.
  *
  * @type {AxiosInstance}
  */
@@ -11,6 +12,19 @@ const axios = Axios.create({
   headers: {
     'Accept-Language': i18n.locale
   }
+})
+
+/**
+ * Before request actions.
+ */
+axios.interceptors.request.use(async config => {
+  if (Authorization.isAuthorized()) {
+    config.headers.Authorization = `Bearer ${Authorization.getAccessToken()}`
+  }
+
+  return config
+}, error => {
+  return Promise.reject(error)
 })
 
 export { axios }

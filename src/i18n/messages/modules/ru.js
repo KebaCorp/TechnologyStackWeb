@@ -30,6 +30,16 @@ export default {
     pageNotFound: 'Страница не найдена',
     tryFollowingPages: 'Пожалуйста, попробуйте перейти на одну из следующих страниц:'
   },
+  auth: {
+    login: 'Войти',
+    logout: 'Выйти',
+    username: 'Логин',
+    password: 'Пароль',
+    rememberMe: 'Запомнить',
+    usernameRequired: 'Необходимо ввести логин',
+    passwordRequired: 'Необходимо ввести пароль',
+    authError: 'Неверный пароль или логин'
+  },
   type: {
     type: 'Тип',
     title: 'Заголовок',

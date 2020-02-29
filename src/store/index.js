@@ -8,6 +8,8 @@ import technologies from './modules/admin/technologies'
 import projects from './modules/admin/projects'
 import technologyItems from './modules/admin/technologyItems'
 import users from './modules/admin/users'
+import user from './modules/user/user'
+import authorization from './modules/auth/authorization'
 
 Vue.use(Vuex)
 
@@ -21,6 +23,8 @@ export default new Vuex.Store({
     technologies,
     projects,
     technologyItems,
-    users
+    users,
+    user,
+    authorization
   }
 })
