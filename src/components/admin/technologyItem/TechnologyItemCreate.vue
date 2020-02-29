@@ -31,6 +31,25 @@
                   autofocus
                 />
 
+                <!--Types-->
+                <v-select
+                  v-model="technologyId"
+                  :items="technologies"
+                  :rules="technologyIdRules"
+                  :label="$t('technology.technology')"
+                  item-text="title"
+                  item-value="id"
+                />
+
+                <!--Stages-->
+                <v-select
+                  v-model="parentId"
+                  :items="technologyItems"
+                  :label="$t('technologyItem.technologyItem')"
+                  item-text="title"
+                  item-value="id"
+                />
+
                 <!--Description editor-->
                 <v-flex pt-4 pb-4>
                   <h4 class="text-left mb-2 font-weight-thin">{{ $t('content.description') }}</h4>
@@ -66,6 +85,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 const ContentEditor = () => import(/* webpackChunkName: 'ContentEditor' */ '@/components/main/ContentEditor')
 
 export default {
@@ -80,6 +101,12 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('technologies', [
+      'technologies'
+    ]),
+    ...mapGetters('technologyItems', [
+      'technologyItems'
+    ]),
     innerDialog: {
       get () {
         return this.dialog
@@ -87,6 +114,11 @@ export default {
       set (value) {
         this.$emit('onToggle', { value })
       }
+    },
+    technologyIdRules () {
+      return [
+        v => !!v || this.$t('validate.required')
+      ]
     },
     titleRules () {
       return [
@@ -98,6 +130,8 @@ export default {
   data: () => ({
     loading: false,
     valid: false,
+    technologyId: null,
+    parentId: 0,
     title: '',
     description: '',
     errors: {}
@@ -110,6 +144,8 @@ export default {
       if (!this.valid || this.loading) return false
 
       this.$store.dispatch('technologyItems/create', {
+        technologyId: this.technologyId,
+        parentId: this.parentId,
         title: this.title,
         description: this.description,
         code: this.code,
@@ -156,6 +192,10 @@ export default {
     onChangeDescription ({ value }) {
       this.description = value
     }
+  },
+  created () {
+    // Load technologies
+    this.$store.dispatch('technologies/setTechnologies')
   }
 }
 </script>

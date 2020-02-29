@@ -36,11 +36,13 @@ export default {
     creating: 'Создание стадии'
   },
   technology: {
+    technology: 'Технология',
     title: 'Заголовок',
     noTechnologies: 'Нет технологий',
     creating: 'Создание технологии'
   },
   technologyItem: {
+    technologyItem: 'Скилл технологии',
     title: 'Заголовок',
     noTechnologyItems: 'Нет скиллов технологии',
     creating: 'Создание скилла технологии'
