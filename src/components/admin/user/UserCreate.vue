@@ -61,6 +61,30 @@
                   type="password"
                 />
 
+                <!--First name-->
+                <v-text-field
+                  v-model="firstName"
+                  :rules="firstNameRules"
+                  :counter="255"
+                  :label="$t('user.firstName')"
+                />
+
+                <!--Last name-->
+                <v-text-field
+                  v-model="lastName"
+                  :rules="lastNameRules"
+                  :counter="255"
+                  :label="$t('user.lastName')"
+                />
+
+                <!--Middle name-->
+                <v-text-field
+                  v-model="middleName"
+                  :rules="middleNameRules"
+                  :counter="255"
+                  :label="$t('user.middleName')"
+                />
+
                 <!--Image-->
                 <v-flex pt-4 pb-4>
                   <h4 class="text-left mb-2 font-weight-thin">{{ $t('content.image') }}</h4>
@@ -191,12 +215,30 @@ export default {
         v => v.length >= 6 || this.$t('validate.minLength', { max: 6 }),
         v => v === this.password || this.$t('validate.notEqualsPassword')
       ]
+    },
+    firstNameRules () {
+      return [
+        v => v.length <= 255 || this.$t('validate.maxLength', { max: 255 })
+      ]
+    },
+    lastNameRules () {
+      return [
+        v => v.length <= 255 || this.$t('validate.maxLength', { max: 255 })
+      ]
+    },
+    middleNameRules () {
+      return [
+        v => v.length <= 255 || this.$t('validate.maxLength', { max: 255 })
+      ]
     }
   },
   data: () => ({
     loading: false,
     valid: false,
     username: '',
+    firstName: '',
+    lastName: '',
+    middleName: '',
     email: '',
     password: '',
     retypePassword: '',
@@ -213,6 +255,9 @@ export default {
 
       this.$store.dispatch('users/create', {
         username: this.username,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        middleName: this.middleName,
         email: this.email,
         password: this.password,
         image: this.image

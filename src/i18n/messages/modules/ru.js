@@ -62,6 +62,9 @@ export default {
   },
   user: {
     username: 'Логин',
+    firstName: 'Имя',
+    lastName: 'Фамилия',
+    middleName: 'Отчество',
     email: 'E-mail',
     password: 'Пароль',
     retypePassword: 'Повтор пароля',
