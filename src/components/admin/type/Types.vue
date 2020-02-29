@@ -1,5 +1,5 @@
 <template>
-  <v-layout row wrap justify-center pt-5>
+  <v-layout row wrap justify-center pt-5 pb-5>
 
     <!--Admin menu-->
     <v-flex

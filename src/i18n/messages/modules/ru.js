@@ -1,7 +1,8 @@
 export default {
   app: {
     name: 'Technologies Stack',
-    logo: '/img/logo.png'
+    logo: '/img/logo.png',
+    defaultImage: '/img/default.jpg'
   },
   menu: {
     types: 'Типы',
@@ -10,7 +11,10 @@ export default {
   },
   content: {
     create: 'Создать',
-    save: 'Сохранить'
+    save: 'Сохранить',
+    image: 'Изображение',
+    changeImage: 'Изменить изображение',
+    deleteImage: 'Удалить изображение'
   },
   messages: {
     successSave: 'Успешно сохранено'
@@ -35,5 +39,24 @@ export default {
   validate: {
     required: 'Значение не может быть пустым',
     maxLength: 'Значение должно быть короче {max} символов'
+  },
+  imageCropUpload: {
+    hint: 'Нажмите, или перетащите изображение в это окно',
+    loading: 'Загрузка…',
+    noSupported: 'Браузер не поддерживает плагин, пожалуйста, используйте Internet Explorer 10+ или другой браузер',
+    success: 'Успешная загрузка',
+    fail: 'Загрузка не удалась',
+    preview: 'Превью',
+    btn: {
+      off: 'Отмена',
+      close: 'Закрыть',
+      back: 'Назад',
+      save: 'Сохранить'
+    },
+    error: {
+      onlyImg: 'Только изображения',
+      outOfSize: 'Размер изображения превышает: ',
+      lowestPx: 'Качество изображения слишком низкое. Ожидается по крайней мере: '
+    }
   }
 }

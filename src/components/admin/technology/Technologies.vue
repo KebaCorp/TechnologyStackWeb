@@ -1,5 +1,5 @@
 <template>
-  <v-layout row wrap justify-center pt-5>
+  <v-layout row wrap justify-center pt-5 pb-5>
 
     <!--Admin menu-->
     <v-flex
@@ -65,7 +65,7 @@
 
                 <!--Карточка записи-->
                 <v-flex
-                  v-for="(technology, index) in technologies"
+                  v-for="technology in technologies"
                   :key="technology._id"
                   xs12
                   mb-3
@@ -73,7 +73,14 @@
                   <v-hover v-slot:default="{ hover }">
                     <v-card :elevation="hover ? 3 : 0">
                       <v-card-title>
-                        {{ index + 1 }}. {{ technology.title }}
+                        <img
+                          :src="technology.image || $t('app.defaultImage')"
+                          :height="50"
+                          :width="50"
+                        />
+                        <v-flex class="text-left pl-5">
+                          {{ technology.title }}
+                        </v-flex>
                         <v-flex class="text-right">
                           <v-btn
                             icon

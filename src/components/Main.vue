@@ -1,5 +1,5 @@
 <template>
-  <v-layout row wrap justify-center pt-5>
+  <v-layout row wrap justify-center pt-5 pb-5>
 
     <!--Empty types message-->
     <v-flex
@@ -74,6 +74,9 @@
                           v-for="technology in stage.technologies"
                           :key="technology.id"
                         >
+                          <v-list-item-avatar>
+                            <v-img :src="technology.image || $t('app.defaultImage')"></v-img>
+                          </v-list-item-avatar>
                           <v-list-item-content>
                             <v-list-item-title class="text-left" v-text="technology.title"></v-list-item-title>
                           </v-list-item-content>
