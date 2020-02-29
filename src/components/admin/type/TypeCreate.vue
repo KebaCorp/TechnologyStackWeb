@@ -26,7 +26,7 @@
                   v-model="title"
                   :rules="titleRules"
                   :counter="255"
-                  :label="$t('type.title')"
+                  :label="$t('type.title') + '*'"
                   required
                   autofocus
                 />

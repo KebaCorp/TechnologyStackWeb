@@ -11,7 +11,7 @@
 
           <!--Title-->
           <v-toolbar-title>
-            {{ $t('technology.creating') }}
+            {{ $t('user.creating') }}
           </v-toolbar-title>
 
         </v-toolbar>
@@ -23,43 +23,43 @@
 
                 <!--Title-->
                 <v-text-field
-                  v-model="title"
-                  :rules="titleRules"
+                  v-model="username"
+                  :rules="usernameRules"
                   :counter="255"
-                  :label="$t('technology.title') + '*'"
+                  :label="$t('user.username') + '*'"
                   required
                   autofocus
                 />
 
-                <!--Types-->
-                <v-select
-                  v-model="typeId"
-                  :items="types"
-                  :rules="typeRules"
-                  :label="$t('type.type') + '*'"
-                  item-text="title"
-                  item-value="id"
+                <!--Email-->
+                <v-text-field
+                  v-model="email"
+                  :rules="emailRules"
+                  :counter="255"
+                  :label="$t('user.email') + '*'"
+                  required
+                  type="email"
                 />
 
-                <!--Stages-->
-                <v-select
-                  v-model="stageId"
-                  :items="stages"
-                  :rules="stageRules"
-                  :label="$t('stage.stage') + '*'"
-                  item-text="title"
-                  item-value="id"
+                <!--Password-->
+                <v-text-field
+                  v-model="password"
+                  :rules="passwordRules"
+                  :counter="255"
+                  :label="$t('user.password') + '*'"
+                  required
+                  type="password"
                 />
 
-                <!--Description editor-->
-                <v-flex pt-4 pb-4>
-                  <h4 class="text-left mb-2 font-weight-thin">{{ $t('content.description') }}</h4>
-                  <content-editor
-                    :value="description"
-                    :disabled="loading"
-                    @onChange="onChangeDescription"
-                  />
-                </v-flex>
+                <!--Retype password-->
+                <v-text-field
+                  v-model="retypePassword"
+                  :rules="retypePasswordRules"
+                  :counter="255"
+                  :label="$t('user.retypePassword') + '*'"
+                  required
+                  type="password"
+                />
 
                 <!--Image-->
                 <v-flex pt-4 pb-4>
@@ -117,13 +117,6 @@
                   />
                 </v-flex>
 
-                <!--Is deprecated-->
-                <v-switch
-                  v-model="isDeprecated"
-                  :label="$t('content.isDeprecated')"
-                  :rules="isDeprecatedRules"
-                />
-
                 <!--Save-->
                 <v-btn
                   :disabled="!valid || loading"
@@ -149,15 +142,11 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
-const ContentEditor = () => import(/* webpackChunkName: 'ContentEditor' */ '@/components/main/ContentEditor')
 const ImageCropUpload = () => import('vue-image-crop-upload')
 
 export default {
-  name: 'TechnologyCreate',
+  name: 'UserCreate',
   components: {
-    ContentEditor,
     ImageCropUpload
   },
   props: {
@@ -167,12 +156,6 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('types', [
-      'types'
-    ]),
-    ...mapGetters('stages', [
-      'stages'
-    ]),
     innerDialog: {
       get () {
         return this.dialog
@@ -181,38 +164,44 @@ export default {
         this.$emit('onToggle', { value })
       }
     },
-    titleRules () {
+    usernameRules () {
       return [
         v => !!v || this.$t('validate.required'),
         v => v.length <= 255 || this.$t('validate.maxLength', { max: 255 })
       ]
     },
-    typeRules () {
+    emailRules () {
       return [
-        v => !!v || this.$t('validate.required')
+        v => !!v || this.$t('validate.required'),
+        v => v.length <= 255 || this.$t('validate.maxLength', { max: 255 }),
+        v => /.+@.+/.test(v) || this.$t('validate.invalidEmail')
       ]
     },
-    stageRules () {
+    passwordRules () {
       return [
-        v => !!v || this.$t('validate.required')
+        v => !!v || this.$t('validate.required'),
+        v => v.length <= 255 || this.$t('validate.maxLength', { max: 255 }),
+        v => v.length >= 6 || this.$t('validate.minLength', { max: 6 })
       ]
     },
-    isDeprecatedRules () {
+    retypePasswordRules () {
       return [
-        v => v !== null || this.$t('validate.required')
+        v => !!v || this.$t('validate.required'),
+        v => v.length <= 255 || this.$t('validate.maxLength', { max: 255 }),
+        v => v.length >= 6 || this.$t('validate.minLength', { max: 6 }),
+        v => v === this.password || this.$t('validate.notEqualsPassword')
       ]
     }
   },
   data: () => ({
     loading: false,
     valid: false,
-    typeId: null,
-    stageId: null,
-    title: '',
-    description: '',
+    username: '',
+    email: '',
+    password: '',
+    retypePassword: '',
     image: '',
     showImageUpload: false,
-    isDeprecated: false,
     errors: {}
   }),
   methods: {
@@ -222,13 +211,11 @@ export default {
     create () {
       if (!this.valid || this.loading) return false
 
-      this.$store.dispatch('technologies/create', {
-        typeId: this.typeId,
-        stageId: this.stageId,
-        title: this.title,
-        description: this.description,
-        image: this.image,
-        isDeprecated: this.isDeprecated
+      this.$store.dispatch('users/create', {
+        username: this.username,
+        email: this.email,
+        password: this.password,
+        image: this.image
       })
         .then(() => {
           this.$emit('onCreate')
@@ -245,8 +232,8 @@ export default {
           this.innerDialog = false
         })
         .then(() => {
-          // Load technologies
-          this.$store.dispatch('technologies/setTechnologies')
+          // Load users
+          this.$store.dispatch('users/setUsers')
         })
         .catch(error => {
           // Error notification
@@ -271,23 +258,7 @@ export default {
     setImage (image) {
       this.image = image
       this.showImageUpload = false
-    },
-
-    /**
-     * On description changed.
-     *
-     * @param value
-     */
-    onChangeDescription ({ value }) {
-      this.description = value
     }
-  },
-  created () {
-    // Load types
-    this.$store.dispatch('types/setTypes')
-
-    // Load stages
-    this.$store.dispatch('stages/setStages')
   }
 }
 </script>

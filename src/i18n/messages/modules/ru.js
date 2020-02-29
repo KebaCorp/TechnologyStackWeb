@@ -10,7 +10,8 @@ export default {
     stages: 'Стадии',
     technologies: 'Технологии',
     projects: 'Проекты',
-    technologyItems: 'Скиллы технологий'
+    technologyItems: 'Скиллы технологий',
+    users: 'Пользователи'
   },
   content: {
     create: 'Создать',
@@ -59,9 +60,20 @@ export default {
     noProjects: 'Нет проектов',
     creating: 'Создание проекта'
   },
+  user: {
+    username: 'Логин',
+    email: 'E-mail',
+    password: 'Пароль',
+    retypePassword: 'Повтор пароля',
+    noUsers: 'Нет пользователей',
+    creating: 'Создание пользователя'
+  },
   validate: {
     required: 'Значение не может быть пустым',
-    maxLength: 'Значение должно быть короче {max} символов'
+    maxLength: 'Значение должно быть короче {max} символов',
+    minLength: 'Значение должно быть длиннее {max} символов',
+    notEqualsPassword: 'Значение должно совпадать с паролью',
+    invalidEmail: 'Введите валидный e-mail'
   },
   imageCropUpload: {
     hint: 'Нажмите, или перетащите изображение в это окно',

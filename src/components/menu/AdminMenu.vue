@@ -36,6 +36,10 @@ export default {
       {
         path: '/admin/projects',
         name: 'projects'
+      },
+      {
+        path: '/admin/users',
+        name: 'users'
       }
     ]
   })

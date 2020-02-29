@@ -26,7 +26,7 @@
                   v-model="title"
                   :rules="titleRules"
                   :counter="255"
-                  :label="$t('technologyItem.title')"
+                  :label="$t('technologyItem.title') + '*'"
                   required
                   autofocus
                 />
@@ -36,7 +36,7 @@
                   v-model="technologyId"
                   :items="technologies"
                   :rules="technologyIdRules"
-                  :label="$t('technology.technology')"
+                  :label="$t('technology.technology') + '*'"
                   item-text="title"
                   item-value="id"
                 />
@@ -45,7 +45,7 @@
                 <v-select
                   v-model="parentId"
                   :items="technologyItems"
-                  :label="$t('technologyItem.technologyItem')"
+                  :label="$t('technologyItem.technologyItem') + '*'"
                   item-text="title"
                   item-value="id"
                 />

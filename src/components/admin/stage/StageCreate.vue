@@ -26,7 +26,7 @@
                   v-model="title"
                   :rules="titleRules"
                   :counter="255"
-                  :label="$t('stage.title')"
+                  :label="$t('stage.title') + '*'"
                   required
                   autofocus
                 />

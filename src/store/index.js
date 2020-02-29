@@ -7,6 +7,7 @@ import stages from './modules/admin/stages'
 import technologies from './modules/admin/technologies'
 import projects from './modules/admin/projects'
 import technologyItems from './modules/admin/technologyItems'
+import users from './modules/admin/users'
 
 Vue.use(Vuex)
 
@@ -19,6 +20,7 @@ export default new Vuex.Store({
     stages,
     technologies,
     projects,
-    technologyItems
+    technologyItems,
+    users
   }
 })

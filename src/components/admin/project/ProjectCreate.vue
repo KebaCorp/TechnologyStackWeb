@@ -26,7 +26,7 @@
                   v-model="title"
                   :rules="titleRules"
                   :counter="255"
-                  :label="$t('project.title')"
+                  :label="$t('project.title') + '*'"
                   required
                   autofocus
                 />
@@ -36,7 +36,7 @@
                   v-model="code"
                   :rules="codeRules"
                   :counter="255"
-                  :label="$t('project.code')"
+                  :label="$t('project.code') + '*'"
                 />
 
                 <!--Description editor-->
